@@ -131,16 +131,10 @@ with st.sidebar:
         if st.button(text, use_container_width=True):
             st.session_state["typed_prompt"] = text
 
-st.info(
-    "This tool is tailored to your course project: an education/edtech AI ethics toolkit based on "
-    "ABACUS/ROBOTS and practical recommendations."
-)
-
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
 if "last_audio_hash" not in st.session_state:
     st.session_state["last_audio_hash"] = ""
-
 
 def process_question(user_question: str, source_label: str) -> None:
     with st.status("Processing", expanded=True) as status:
