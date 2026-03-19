@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import os
 from typing import Any, Dict, List
 
 import streamlit as st
@@ -10,6 +11,23 @@ from src.ai_pipeline import VoicePipeline
 from src.rag import SlideRetriever, resolve_env
 
 load_dotenv()
+
+# In Streamlit Community Cloud, secrets are set in App settings -> Secrets.
+# Mirror known keys into environment variables for existing code paths.
+for key in [
+    "CHAT_MODEL",
+    "WHISPER_MODEL",
+    "TTS_MODEL",
+    "TTS_VOICE",
+    "CHROMA_PERSIST_DIRECTORY",
+    "CHROMA_COLLECTION_NAME",
+    "EMBEDDING_MODEL",
+    "TOP_K",
+    "MIN_RELEVANCE_SCORE",
+    "COURSE_WEEK_FILTER",
+]:
+    if not os.getenv(key) and key in st.secrets:
+        os.environ[key] = str(st.secrets[key])
 
 st.set_page_config(page_title="Analytics and Society Voice Copilot", page_icon="🎙️", layout="wide")
 

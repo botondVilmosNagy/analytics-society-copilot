@@ -104,6 +104,35 @@ It checks:
 3. Import smoke test for core modules
 4. Optional OpenAI client initialization when `OPENAI_API_KEY` secret exists
 
+## Streamlit Community Cloud deployment
+
+This repository is prepared so deployment has all required resources:
+
+- Slide PDF: `data/slides/context.pdf`
+- Prebuilt vector DB: `context_db/`
+
+### Steps
+
+1. Open Streamlit Community Cloud and click `New app`.
+2. Select repository: `botondVilmosNagy/analytics-society-copilot`.
+3. Branch: `main`.
+4. Main file path: `app.py`.
+5. In `Advanced settings` -> `Secrets`, add:
+
+```toml
+OPENAI_API_KEY = "your_openai_api_key_here"
+```
+
+Optional extra keys can be copied from `.streamlit/secrets.toml.example`.
+
+6. Deploy.
+
+### Notes
+
+- The app reads from `.env` locally and from Streamlit Secrets in cloud.
+- Do not commit real secrets to git.
+- If you later regenerate the vector DB locally, commit updated `context_db/` files before redeploying.
+
 ## UX notes
 
 - Chat-style message bubbles (`st.chat_message`)

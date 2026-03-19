@@ -2,7 +2,6 @@
 .venv/
 
 # Local vector DB and caches
-context_db/
 chroma_db/
 __pycache__/
 **/__pycache__/
@@ -10,6 +9,3 @@ __pycache__/
 # OS/editor noise
 .DS_Store
 data/.DS_Store
-
-# Keep source code, avoid committing large or proprietary raw course files
-data/slides/*.pdf
