@@ -72,6 +72,38 @@ Run app:
 streamlit run app.py
 ```
 
+## After publishing to GitHub
+
+### 1) Configure repository secrets
+
+Go to your repository settings:
+
+`Settings -> Secrets and variables -> Actions -> New repository secret`
+
+Add at least:
+
+- `OPENAI_API_KEY`
+
+Optional (if you later move environment values into Actions workflows):
+
+- `CHAT_MODEL`
+- `WHISPER_MODEL`
+- `TTS_MODEL`
+- `TTS_VOICE`
+
+Note: do **not** commit `.env`. This repo keeps `.env` ignored and uses `.env.example` for template values.
+
+### 2) CI validation
+
+This repo includes a GitHub Actions workflow at `.github/workflows/ci.yml` that runs on push and pull requests.
+
+It checks:
+
+1. Dependency installation
+2. Python syntax compilation (`compileall`)
+3. Import smoke test for core modules
+4. Optional OpenAI client initialization when `OPENAI_API_KEY` secret exists
+
 ## UX notes
 
 - Chat-style message bubbles (`st.chat_message`)
