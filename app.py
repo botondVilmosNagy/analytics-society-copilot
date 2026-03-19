@@ -16,6 +16,11 @@ load_dotenv()
 
 # In Streamlit Community Cloud, secrets are set in App settings -> Secrets.
 # Mirror known keys into environment variables for existing code paths.
+try:
+    secrets_map = dict(st.secrets)
+except Exception:
+    secrets_map = {}
+
 for key in [
     "CHAT_MODEL",
     "WHISPER_MODEL",
@@ -28,8 +33,8 @@ for key in [
     "MIN_RELEVANCE_SCORE",
     "COURSE_WEEK_FILTER",
 ]:
-    if not os.getenv(key) and key in st.secrets:
-        os.environ[key] = str(st.secrets[key])
+    if not os.getenv(key) and key in secrets_map:
+        os.environ[key] = str(secrets_map[key])
 
 st.set_page_config(page_title="Analytics and Society Voice Copilot", page_icon="🎙️", layout="wide")
 
