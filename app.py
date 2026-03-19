@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 from src.ai_pipeline import VoicePipeline
 from src.rag import SlideRetriever, resolve_env
 
+# Load committed non-secret defaults first, then local developer overrides.
+load_dotenv(".env.shared")
 load_dotenv()
 
 # In Streamlit Community Cloud, secrets are set in App settings -> Secrets.

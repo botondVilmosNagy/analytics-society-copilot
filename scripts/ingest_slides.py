@@ -153,6 +153,7 @@ def batched(items: List[Document], size: int) -> List[List[Document]]:
 
 
 def main() -> None:
+    load_dotenv(".env.shared")
     load_dotenv()
     args = parse_args()
 

@@ -23,7 +23,19 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Update `.env` values to match your roommate's vector DB:
+Configuration loading order:
+
+1. `.env.shared` (committed non-secret defaults)
+2. `.env` (local developer overrides)
+3. Streamlit Cloud `Secrets` (deployment overrides)
+
+Update `.env` values as needed. Most non-secret defaults are already versioned in `.env.shared`.
+
+The only value that should stay secret is:
+
+- `OPENAI_API_KEY`
+
+Core non-secret values already tracked in repo include:
 
 - `CHROMA_PERSIST_DIRECTORY`
 - `CHROMA_COLLECTION_NAME`
@@ -117,7 +129,7 @@ This repository is prepared so deployment has all required resources:
 2. Select repository: `botondVilmosNagy/analytics-society-copilot`.
 3. Branch: `main`.
 4. Main file path: `app.py`.
-5. In `Advanced settings` -> `Secrets`, add:
+5. In `Advanced settings` -> `Secrets`, add at minimum:
 
 ```toml
 OPENAI_API_KEY = "your_openai_api_key_here"
